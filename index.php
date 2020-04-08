@@ -1,24 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <meta charset="UTF-8">
-    <title>Simon's Dentistry</title>
+     <title>Dentistry Database</title>
 </head>
 <body>
-<h1 align = "center"> Welcome to the Dentistry where you execute requiered queries </h1>
+<h1 align = "center">Welcome to the Dentistry Database</h1>
 
 <P>
-  A.  If you click the buttons below you will able to get the details of all dentists in the chosen clinic
+  A.  View details of all dentists in the chosen clinic
 </P>
-<button> Clinic 1 </button> <button> Clinic 2 </button> <button> Clinic 3 </button>
 
-<!--
-<p> SPACE TO PUT THE ANSWERS OF THE REQUIRED QUERY </p>
- -->
+<form method="post">
+    <input type="submit" name="all" value="All"/>
+    <input type="submit" name="clinic1" value="Clinic 1"/>
+    <input type="submit" name="clinic2" value="Clinic 2" />
+    <input type="submit" name="clinic3" value="Clinic 3"/>
+</form>
 
+<?php
+
+if (isset($_POST['all'])) {
+    try  {
+       
+        require "config.php";
+        require "common.php";
+    
+        $connection = new PDO($dsn, $username, $password, $options);
+
+        $sql = "SELECT Dentist.name, Dentist.DID, Clinic.name as clinicName, Assistant.name as assistantName
+        FROM clinic, Dentist, Assistant
+        WHERE Clinic.CIC=Dentist.CIC AND Dentist.DID=Assistant.DID";
+
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        if ($result && $statement->rowCount() > 0) {
+        ?>
+            <h3>Results</h3>
+        <?php 
+            foreach ($result as $row) { ?>
+                <tr>
+                    <td>Name: <?php echo $row["name"]; ?></td>
+                    <td>Dentist ID: <?php echo $row["DID"]; ?></td>
+                    <td>Clinic: <?php echo $row["clinicName"]; ?></td>
+                    <td>Assistant: <?php echo $row["assistantName"]; ?></td>
+                </tr>
+                <br>
+            <?php }
+        }
+    } catch(PDOException $error) {
+        echo $sql . "<br>" . $error->getMessage();
+    }
+} ?>
 
 <P>
    B. Get details of all appointments for a given dentist for a specific week.
@@ -190,8 +229,8 @@ Details about unpaid bills: <textarea name="comment" rows="5" cols="40"><?php "C
         <option value = "Patient 22">Maher</option>
     </select>
     <input type="date" id="date3" name="date3">
-    <p><button class="w3-btn w3-orange w3-xlarge"><i class="glyphicon glyphicon-trash"></i></i></button><!-- USED TO DELETE -->
-    <button class="w3-btn w3-orange w3-xlarge"><i class="glyphicon glyphicon-user"></i></i></button><!-- USED TO NEW APPOINTMENTS -->
+    <p><button class="w3-btn w3-orange w3-xlarge"><i class="glyphicon glyphicon-trash"></i></input></button><!-- USED TO DELETE -->
+    <button class="w3-btn w3-orange w3-xlarge"><i class="glyphicon glyphicon-user"></i></input></button><!-- USED TO NEW APPOINTMENTS -->
     </p>
 </form>
 <a href = DBA.html>

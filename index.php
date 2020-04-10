@@ -65,21 +65,21 @@ if (isset($_POST['all'])) {
 
 <form action = "SHOULD BE THE PHP CODE HERE">
     <select name = "dropdown">
-        <option value = "Dentist 1" selected>Schmidt</option>
-        <option value = "Dentist 2">Taylor</option>
-        <option value = "Dentist 3">Camara</option>
-        <option value = "Dentist 3">Telmo</option>
-        <option value = "Dentist 3">Smurf</option>
-        <option value = "Dentist 3">Snitzl</option>
-        <option value = "Dentist 3">Pringles</option>
-        <option value = "Dentist 3">Lays</option>
-        <option value = "Dentist 3">Davis</option>
-        <option value = "Dentist 3">Richards</option>
+        <option value = "Dentist_1" selected>Schmidt</option>
+        <option value = "Dentist_2">Taylor</option>
+        <option value = "Dentist_3">Camara</option>
+        <option value = "Dentist_4">Telmo</option>
+        <option value = "Dentist_5">Smurf</option>
+        <option value = "Dentist_6">Snitzl</option>
+        <option value = "Dentist_7">Pringles</option>
+        <option value = "Dentist_8">Lays</option>
+        <option value = "Dentist_9">Davis</option>
+        <option value = "Dentist_10">Richards</option>
     </select>
     <select name = "dropdown">
-        <option value = "Week 1" selected>Week 1</option>
-        <option value = "Week 2">Week 2</option>
-        <option value = "Week 3">Week 3</option>
+        <option value = "Week_1" selected>Week 1</option>
+        <option value = "Week_2">Week 2</option>
+        <option value = "Week_3">Week 3</option>
     </select>
 
     <input type="submit" name="submit" value="Submit">

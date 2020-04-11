@@ -185,7 +185,7 @@ if (isset($_POST['all'])) {
 <p> SPACE TO PUT THE ANSWERS OF THE REQUIRED QUERY </p>
  -->
 <P>
-    G. Get details of all the treatments made during a given appointment by clicking on the button below.
+    G. Get details of all unpaid bills by clicking on the button below.
 </P>
 <button> Check unpaid bills </button>
 <br>

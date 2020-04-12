@@ -7,8 +7,10 @@
     <li><a href="appointmentsByClinic.php"><strong>View details of appointments by clinic for a given date</strong></a></li>
     <li><a href="appointmentsByPatient.php"><strong>View details of appointments by patient</strong></a></li>
     <li><a href="missedAppointments.php"><strong>View number of missed appointments for each patient (only for patients who have missed at least 1 appointment)</strong></a></li>
+    <li><a href="unpaidBills.php"><strong>View details of all unpaid bills</strong></a></li>
 </ul>
 
+<!-- 
 <h3>
     F. Get details of all the treatments made during a given appointment.
 </h3>
@@ -22,18 +24,9 @@
     <label for="date">Chose a given apointment at a given clinic:</label>
     <input type="date" id="date2" name="date2">
     <input type="submit">
-</form>
+</form> -->
 
-<!--
-<p> SPACE TO PUT THE ANSWERS OF THE REQUIRED QUERY </p>
--->
-<h3>
-    G. Get details of all unpaid bills by clicking on the button below.
-</h3>
-<button> Check unpaid bills </button>
-<br>
-Details about unpaid bills: <textarea name="comment" rows="5" cols="40"><?php "CODE HERE"?></textarea>
-<h3>
+<!-- <h3>
     Enter the name of the patient you would want to add
 </h3>
 <form action="SHOULD BE PHP CODE HERE">
@@ -73,9 +66,9 @@ Details about unpaid bills: <textarea name="comment" rows="5" cols="40"><?php "C
     </select>
     <input type="date" id="date3" name="date3">
     <p><button class="w3-btn w3-orange w3-xlarge"><i class="glyphicon glyphicon-trash"></i></input></button><!-- USED TO DELETE -->
-    <button class="w3-btn w3-orange w3-xlarge"><i class="glyphicon glyphicon-user"></i></input></button><!-- USED TO NEW APPOINTMENTS -->
-    </p>
-</form>
+    <!-- <button class="w3-btn w3-orange w3-xlarge"><i class="glyphicon glyphicon-user"></i></input></button><!-- USED TO NEW APPOINTMENTS -->
+    <!-- </p>
+</form>  -->
 <a href = DBA.html>
     <button class="w3-button w3-deep-orange">Access to DBA page </button>
 </a>

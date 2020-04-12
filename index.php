@@ -4,28 +4,10 @@
 <ul>
     <li><a href="dentistDetails.php"><strong>View details of all dentists</strong></a></li>
     <li><a href="appointmentsByDentist.php"><strong>View details of appointments by dentist for a given week</strong></a></li>
+    <li><a href="appointmentsByClinic.php"><strong>View details of appointments by clinic for a given date</strong></a></li>
+
 </ul>
 
-<!--
-<p> SPACE TO PUT THE ANSWERS OF THE REQUIRED QUERY </p>
--->
-<h3>
-    C. Get details of all appointments at a given clinic on a specific date.
-</h3>
-
-<form action = "SHOULD BE THE PHP CODE HERE">
-    <select name = "dropdown">
-        <option value = "Clinic 1" selected>Clinic 1</option>
-        <option value = "Clinic 2">Clinic 2</option>
-        <option value = "Clinic 3">Clinic 3</option>
-    </select>
-    <label for="date">Specific date:</label>
-    <input type="date" id="date" name="date">
-    <input type="submit">
-</form>
-<!--
-<p> SPACE TO PUT THE ANSWERS OF THE REQUIRED QUERY </p>
--->
 <h3>
     D. Get details of all appointments of a given patient.
 </h3>

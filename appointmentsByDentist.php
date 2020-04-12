@@ -28,7 +28,7 @@ try  {
 }
 ?>
 
-<form action="" method="post">
+<form method="post">
     <label>Select a dentist:</label>
     <select name="selectDentist">
         <option value="1"><?php echo $dentists[0]["name"];?></option>
@@ -60,18 +60,17 @@ if (isset($_POST['submit'])) {
         if (empty($week)) {
             $sql = "SELECT Appointment.*, Clinic.name as clinicName, Patient.name as patientName
             FROM Appointment, Clinic, Patient
-            WHERE DID=" . $dentistID . " AND Clinic.CIC=Appointment.CIC AND Patient.PID=Appointment.PID";
+            WHERE Appointment.DID=" . $dentistID . " AND Clinic.CIC=Appointment.CIC AND Patient.PID=Appointment.PID";
         } else {
             $sql = "SELECT Appointment.*, Clinic.name as clinicName, Patient.name as patientName
             FROM Appointment, Clinic, Patient
-            WHERE DID=" . $dentistID . " AND Clinic.CIC=Appointment.CIC AND Patient.PID=Appointment.PID AND YEARWEEK(date, 1)=" . $year . $interval;
+            WHERE Appointment.DID=" . $dentistID . " AND Clinic.CIC=Appointment.CIC AND Patient.PID=Appointment.PID AND YEARWEEK(date, 1)=" . $year . $interval;
         }
 
         $statement = $connection->prepare($sql);
         $statement->execute();
         $result = $statement->fetchAll();
          
-
         if ($result && $statement->rowCount() > 0) { ?>
             <br>
             <h4>Appointments with <?php echo $dentists[$dentistID - 1]["name"]; ?> </h4>

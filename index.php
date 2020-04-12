@@ -6,36 +6,8 @@
     <li><a href="appointmentsByDentist.php"><strong>View details of appointments by dentist for a given week</strong></a></li>
     <li><a href="appointmentsByClinic.php"><strong>View details of appointments by clinic for a given date</strong></a></li>
     <li><a href="appointmentsByPatient.php"><strong>View details of appointments by patient</strong></a></li>
-
+    <li><a href="missedAppointments.php"><strong>View number of missed appointments for each patient (only for patients who have missed at least 1 appointment)</strong></a></li>
 </ul>
-
-<!--
-<p> SPACE TO PUT THE ANSWERS OF THE REQUIRED QUERY </p>
--->
-<h3>
-    E. Get the number of missed appointments for each patient (only for patients who have missed at least 1 appointment).
-</h3>
-
-<form action="SHOULD BE THE PHP CODE HERE" method="get">
-    <input type="checkbox" name="patient1" value="patient1">
-    <label for="patient1"> Sandi</label><br>
-    <input type="checkbox" name="patient2" value="patient2">
-    <label for="patient2"> Samir</label><br>
-    <input type="checkbox" name="patient3" value="patient3" checked>
-    <label for="patient3"> Maher</label><br>
-    <input type="checkbox" name="patient1" value="patient1">
-    <label for="patient4"> Kassir</label><br>
-    <input type="checkbox" name="patient4" value="patient4">
-    <label for="patient5"> Sandi</label><br>
-    <input type="checkbox" name="patient5" value="patient5">
-    <label for="patient6"> Amal</label><br>
-    <br>
-    <input type="submit" value="Submit">
-</form>
-
-<!--
-<p> SPACE TO PUT THE ANSWERS OF THE REQUIRED QUERY </p>
--->
 
 <h3>
     F. Get details of all the treatments made during a given appointment.

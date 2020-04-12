@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
         $clinicID = $_POST['selectClinic'];
         $date = $_POST['date'];
 
-        // if no week is selected, return all appointments at selected clinic
+        // if no date is selected, return all appointments at selected clinic
         if (empty($date)) {
             $sql = "SELECT Appointment.*, Dentist.name as dentistName, Patient.name as patientName
             FROM Appointment, Dentist, Patient
@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
                 foreach ($result as $row) { ?>
                     <tr>
                         <td>Appointment ID: <?php echo $row["AID"]; ?></td>
-                        <td>Clinic: <?php echo $row["clinicName"]; ?></td>
+                        <td>Clinic: <?php echo $clinics[$clinicID-1]["name"]; ?></td>
                         <td>Patient: <?php echo $row["patientName"]; ?></td>
                         <td>Dentist: <?php echo $row["dentistName"]; ?></td>
                         <td>Patient attended appointment: <?php 

@@ -76,7 +76,7 @@ if (isset($_POST['submit'])) {
                         <td>Appointment ID: <?php echo $row["AID"]; ?></td>
                         <td>Clinic: <?php echo $row["clinicName"]; ?></td>
                         <td>Patient: <?php echo $row["patientName"]; ?></td>
-                        <td>Dentist: <?php echo $dentists[$dentistID]; ?></td>
+                        <td>Dentist: <?php echo $dentists[$dentistID-1]["name"]; ?></td>
                         <td>Patient attended appointment: <?php 
                             if ($row["attended"] == 1) {
                                 echo "Yes";

@@ -99,6 +99,6 @@ if (isset($_POST['submit'])) {
 
 <br>
 
-<a href="index.php" style="margin-left: 25px;">Return to Dentistry Database</a>
+<a href="index.php" style="margin-left: 25px;">Back to home</a>
 
 <?php require "resources/footer.php"; ?>

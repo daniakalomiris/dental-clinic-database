@@ -28,7 +28,7 @@ try  {
 }
 ?>
 
-<form method="post">
+<form method="post" style="margin-left: 25px;">
     <label>Select a dentist:</label>
     <select name="selectDentist">
         <?php 
@@ -42,6 +42,8 @@ try  {
     <input type="week" id="week" name="week">
     <input type="submit" name="submit" value="Search">
 </form>
+
+<br>
 
 <?php
 if (isset($_POST['submit'])) {
@@ -68,29 +70,30 @@ if (isset($_POST['submit'])) {
         $result = $statement->fetchAll();
          
         if ($result && $statement->rowCount() > 0) { ?>
-            <br>
-            <h4>Appointments with <?php echo $dentists[$dentistID - 1]["name"]; ?> </h4>
+            <h4 style="margin-left: 25px;">Appointments with <?php echo $dentists[$dentistID - 1]["name"]; ?> </h4>
             <?php 
                 foreach ($result as $row) { ?>
-                    <tr>
-                        <td>Appointment ID: <?php echo $row["AID"]; ?></td>
-                        <td>Clinic: <?php echo $row["clinicName"]; ?></td>
-                        <td>Patient: <?php echo $row["patientName"]; ?></td>
-                        <td>Dentist: <?php echo $dentists[$dentistID-1]["name"]; ?></td>
-                        <td>Patient attended appointment: <?php 
-                            if ($row["attended"] == 1) {
-                                echo "Yes";
-                            } else {
-                                echo "No";
-                            }
-                            ?></td>
-                        <td>Date: <?php echo $row["date"]; ?></td>
-                        <td>Time: <?php echo $row["time"]; ?></td>
-                    </tr>
+                    <div class="card" style="margin-left: 25px;">
+                        <tr>
+                            <td>Appointment ID: <?php echo $row["AID"]; ?></td>
+                            <td>Clinic: <?php echo $row["clinicName"]; ?></td>
+                            <td>Patient: <?php echo $row["patientName"]; ?></td>
+                            <td>Dentist: <?php echo $dentists[$dentistID-1]["name"]; ?></td>
+                            <td>Patient attended appointment: <?php 
+                                if ($row["attended"] == 1) {
+                                    echo "Yes";
+                                } else {
+                                    echo "No";
+                                }
+                                ?></td>
+                            <td>Date: <?php echo $row["date"]; ?></td>
+                            <td>Time: <?php echo $row["time"]; ?></td>
+                        </tr>
+                    </div>
                     <br>
                 <?php }
             } else { ?>
-                <h4>There are no appointments with <?php echo $dentists[$dentistID - 1]["name"]; ?> </h4>
+                <h4 style="margin-left: 25px;">There are no appointments with <?php echo $dentists[$dentistID - 1]["name"]; ?> </h4>
             <?php }
     } catch(PDOException $error) {
         echo $sql . "<br>" . $error->getMessage();
@@ -99,6 +102,6 @@ if (isset($_POST['submit'])) {
 
 <br>
 
-<a href="index.php">Return to Dentistry Database</a>
+<a href="index.php" style="margin-left: 25px;">Return to Dentistry Database</a>
 
 <?php require "resources/footer.php"; ?>

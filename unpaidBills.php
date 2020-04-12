@@ -19,15 +19,17 @@ try  {
     $result = $statement->fetchAll();
         
     if ($result && $statement->rowCount() > 0) { ?>
-        <h4>Unpaid bills</h4>
+        <h4 style="margin-left: 25px;">Unpaid bills</h4>
         <?php 
             foreach ($result as $row) { ?>
-                <tr>
-                    <td>Bill ID: <?php echo $row["BID"]; ?></td>
-                    <td>Amount: <?php echo "$" . $row["amount"]; ?></td>
-                    <td>Appointment ID: <?php echo $row["AID"]; ?></td>
-                    <td>Processed by: <?php echo $row["receptionistName"]; ?></td>
-                </tr>
+                <div class="card" style="margin-left: 25px;">
+                    <tr>
+                        <td>Bill ID: <?php echo $row["BID"]; ?></td>
+                        <td>Amount: <?php echo "$" . $row["amount"]; ?></td>
+                        <td>Appointment ID: <?php echo $row["AID"]; ?></td>
+                        <td>Processed by: <?php echo $row["receptionistName"]; ?></td>
+                    </tr>
+                </div>
                 <br>
             <?php }
     }
@@ -38,6 +40,6 @@ try  {
 
 <br>
 
-<a href="index.php">Return to Dentistry Database</a>
+<a href="index.php" style="margin-left: 25px;">Return to Dentistry Database</a>
 
 <?php require "resources/footer.php"; ?>

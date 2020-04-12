@@ -20,13 +20,15 @@ try  {
     $result = $statement->fetchAll();
         
     if ($result && $statement->rowCount() > 0) { ?>
-        <h4>Appointments missed (at least 1)</h4>
+        <h4 style="margin-left: 25px;">Appointments missed (at least 1)</h4>
         <?php 
             foreach ($result as $row) { ?>
-                <tr>
-                    <td>Patient: <?php echo $row["name"]; ?></td>
-                    <td>Appointments missed: <?php echo $row["missedAppointments"]; ?> </td>
-                </tr>
+                <div class="card" style="margin-left: 25px;">
+                    <tr>
+                        <td>Patient: <?php echo $row["name"]; ?></td>
+                        <td>Appointments missed: <?php echo $row["missedAppointments"]; ?> </td>
+                    </tr>
+                </div>
                 <br>
             <?php }
     }
@@ -37,6 +39,6 @@ try  {
 
 <br>
 
-<a href="index.php">Return to Dentistry Database</a>
+<a href="index.php" style="margin-left: 25px;">Return to Dentistry Database</a>
 
 <?php require "resources/footer.php"; ?>

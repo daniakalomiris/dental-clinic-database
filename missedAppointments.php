@@ -10,53 +10,30 @@ try  {
 
     $connection = new PDO($dsn, $username, $password, $options);
 
-    $sql = "SELECT * FROM Patient";
+    $sql = "SELECT Patient.name, Appointment.PID, COUNT(Appointment.attended) as missedAppointments
+            FROM Appointment, Patient
+            WHERE attended=0 AND Patient.PID=Appointment.PID
+            GROUP BY PID";
 
     $statement = $connection->prepare($sql);
     $statement->execute();
     $result = $statement->fetchAll();
-
+        
     if ($result && $statement->rowCount() > 0) { ?>
-    <br>
-    <?php 
-        foreach ($result as $row) { 
-            $patients[] = $row; ?>
-        <?php }
+        <h4>Appointments missed (at least 1)</h4>
+        <?php 
+            foreach ($result as $row) { ?>
+                <tr>
+                    <td>Patient: <?php echo $row["name"]; ?></td>
+                    <td>Appointments missed: <?php echo $row["missedAppointments"]; ?> </td>
+                </tr>
+                <br>
+            <?php }
     }
 } catch(PDOException $error) {
     echo $sql . "<br>" . $error->getMessage();
 }
 ?>
-
-<?php
-if (isset($_POST['submit'])) {
-    try  {
-        $patientID = $_POST['selectPatient'];
-
-        $sql = "SELECT Patient.name, Appointment.PID, COUNT(Appointment.attended) as missedAppointments
-                FROM Appointment, Patient
-                WHERE attended=0 AND Patient.PID=Appointment.PID
-                GROUP BY PID";
-
-        $statement = $connection->prepare($sql);
-        $statement->execute();
-        $result = $statement->fetchAll();
-         
-        if ($result && $statement->rowCount() > 0) { ?>
-            <h4>Appointments missed (at least 1)</h4>
-            <?php 
-                foreach ($result as $row) { ?>
-                    <tr>
-                        <td>Patient: <?php echo $row["name"]; ?></td>
-                        <td>Appointments missed: <?php echo $row["missedAppointments"]; ?></td>
-                    </tr>
-                    <br>
-                <?php }
-        }
-    } catch(PDOException $error) {
-        echo $sql . "<br>" . $error->getMessage();
-    }
-} ?>
 
 <br>
 

@@ -1,96 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-     <title>Dentistry Database</title>
-</head>
-<body>
+<?php include "resources/header.php"; ?>
 <h1 align = "center">Welcome to the Dentistry Database</h1>
 
-<P>
-  A.  View details of all dentists in the chosen clinic
-</P>
-
-<form method="post">
-    <input type="submit" name="all" value="All"/>
-    <input type="submit" name="clinic1" value="Clinic 1"/>
-    <input type="submit" name="clinic2" value="Clinic 2" />
-    <input type="submit" name="clinic3" value="Clinic 3"/>
-</form>
-
-<?php
-
-if (isset($_POST['all'])) {
-    try  {
-       
-        require "config.php";
-        require "common.php";
-    
-        $connection = new PDO($dsn, $username, $password, $options);
-
-        $sql = "SELECT Dentist.name, Dentist.DID, Clinic.name as clinicName, Assistant.name as assistantName
-        FROM clinic, Dentist, Assistant
-        WHERE Clinic.CIC=Dentist.CIC AND Dentist.DID=Assistant.DID";
-
-        $statement = $connection->prepare($sql);
-        $statement->execute();
-        $result = $statement->fetchAll();
-
-        if ($result && $statement->rowCount() > 0) {
-        ?>
-            <h3>Results</h3>
-        <?php 
-            foreach ($result as $row) { ?>
-                <tr>
-                    <td>Name: <?php echo $row["name"]; ?></td>
-                    <td>Dentist ID: <?php echo $row["DID"]; ?></td>
-                    <td>Clinic: <?php echo $row["clinicName"]; ?></td>
-                    <td>Assistant: <?php echo $row["assistantName"]; ?></td>
-                </tr>
-                <br>
-            <?php }
-        }
-    } catch(PDOException $error) {
-        echo $sql . "<br>" . $error->getMessage();
-    }
-} ?>
-
-<P>
-   B. Get details of all appointments for a given dentist for a specific week.
-</P>
-
-<form action = "SHOULD BE THE PHP CODE HERE">
-    <select name = "dropdown">
-        <option value = "Dentist_1" selected>Schmidt</option>
-        <option value = "Dentist_2">Taylor</option>
-        <option value = "Dentist_3">Camara</option>
-        <option value = "Dentist_4">Telmo</option>
-        <option value = "Dentist_5">Smurf</option>
-        <option value = "Dentist_6">Snitzl</option>
-        <option value = "Dentist_7">Pringles</option>
-        <option value = "Dentist_8">Lays</option>
-        <option value = "Dentist_9">Davis</option>
-        <option value = "Dentist_10">Richards</option>
-    </select>
-    <select name = "dropdown">
-        <option value = "Week_1" selected>Week 1</option>
-        <option value = "Week_2">Week 2</option>
-        <option value = "Week_3">Week 3</option>
-    </select>
-
-    <input type="submit" name="submit" value="Submit">
-</form>
+<ul>
+    <li><a href="dentistDetails.php"><strong>View details of all dentists</strong></a></li>
+    <li><a href="appointmentsByDentist.php"><strong>View details of appointments by dentist for a given week</strong></a></li>
+</ul>
 
 <!--
 <p> SPACE TO PUT THE ANSWERS OF THE REQUIRED QUERY </p>
- -->
-<P>
+-->
+<h3>
     C. Get details of all appointments at a given clinic on a specific date.
-</P>
+</h3>
 
 <form action = "SHOULD BE THE PHP CODE HERE">
     <select name = "dropdown">
@@ -104,10 +25,10 @@ if (isset($_POST['all'])) {
 </form>
 <!--
 <p> SPACE TO PUT THE ANSWERS OF THE REQUIRED QUERY </p>
- -->
-<P>
+-->
+<h3>
     D. Get details of all appointments of a given patient.
-</P>
+</h3>
 <form action = "SHOULD BE THE PHP CODE HERE">
     <select name = "dropdown">
         <option value = "Patient 0" selected>-Select Patient-</option>
@@ -140,10 +61,10 @@ if (isset($_POST['all'])) {
 
 <!--
 <p> SPACE TO PUT THE ANSWERS OF THE REQUIRED QUERY </p>
- -->
-<P>
+-->
+<h3>
     E. Get the number of missed appointments for each patient (only for patients who have missed at least 1 appointment).
-</P>
+</h3>
 
 <form action="SHOULD BE THE PHP CODE HERE" method="get">
     <input type="checkbox" name="patient1" value="patient1">
@@ -164,11 +85,11 @@ if (isset($_POST['all'])) {
 
 <!--
 <p> SPACE TO PUT THE ANSWERS OF THE REQUIRED QUERY </p>
- -->
+-->
 
-<P>
+<h3>
     F. Get details of all the treatments made during a given appointment.
-</P>
+</h3>
 
 <form action = "SHOULD BE THE PHP CODE HERE">
     <select name = "dropdown">
@@ -183,25 +104,25 @@ if (isset($_POST['all'])) {
 
 <!--
 <p> SPACE TO PUT THE ANSWERS OF THE REQUIRED QUERY </p>
- -->
-<P>
+-->
+<h3>
     G. Get details of all unpaid bills by clicking on the button below.
-</P>
+</h3>
 <button> Check unpaid bills </button>
 <br>
 Details about unpaid bills: <textarea name="comment" rows="5" cols="40"><?php "CODE HERE"?></textarea>
-<P>
+<h3>
     Enter the name of the patient you would want to add
-</P>
+</h3>
 <form action="SHOULD BE PHP CODE HERE">
     <textarea placeholder="Write down the name of the patient you want to add" name="message" rows="3" cols="20"></textarea>
     <br>
     <input type="submit" value="Add new patient to the database">
 </form>
 <br>
-<P>
+<h3>
     Select the patient you would like to schedule new appointments, modify, delete existing appointments
-</P>
+</h3>
 <form action = "SHOULD BE THE PHP CODE HERE">
     <select name = "dropdown">
         <option value = "Patient 0" selected>-Select Patient-</option>
@@ -236,5 +157,5 @@ Details about unpaid bills: <textarea name="comment" rows="5" cols="40"><?php "C
 <a href = DBA.html>
     <button class="w3-button w3-deep-orange">Access to DBA page </button>
 </a>
-</body>
-</html>
+
+<?php include "resources/footer.php"; ?>

@@ -5,41 +5,9 @@
     <li><a href="dentistDetails.php"><strong>View details of all dentists</strong></a></li>
     <li><a href="appointmentsByDentist.php"><strong>View details of appointments by dentist for a given week</strong></a></li>
     <li><a href="appointmentsByClinic.php"><strong>View details of appointments by clinic for a given date</strong></a></li>
+    <li><a href="appointmentsByPatient.php"><strong>View details of appointments by patient</strong></a></li>
 
 </ul>
-
-<h3>
-    D. Get details of all appointments of a given patient.
-</h3>
-<form action = "SHOULD BE THE PHP CODE HERE">
-    <select name = "dropdown">
-        <option value = "Patient 0" selected>-Select Patient-</option>
-        <option value = "Patient 1">Alaa</option>
-        <option value = "Patient 2">Nedjma</option>
-        <option value = "Patient 3">Nani</option>
-        <option value = "Patient 4">Zaha</option>
-        <option value = "Patient 5">Zalema</option>
-        <option value = "Patient 6">Shiri</option>
-        <option value = "Patient 7">Kassir</option>
-        <option value = "Patient 8">Hend</option>
-        <option value = "Patient 9">Nesma</option>
-        <option value = "Patient 10">Samir</option>
-        <option value = "Patient 11">Samantha</option>
-        <option value = "Patient 12">Sami</option>
-        <option value = "Patient 13">Samantha</option>
-        <option value = "Patient 14">Sandi</option>
-        <option value = "Patient 15">Karma</option>
-        <option value = "Patient 16">Alaa</option>
-        <option value = "Patient 17">Manyal</option>
-        <option value = "Patient 18">Amal</option>
-        <option value = "Patient 19">Manal</option>
-        <option value = "Patient 20">Asma</option>
-        <option value = "Patient 21">Nader</option>
-        <option value = "Patient 22">Maher</option>
-    </select>
-
-    <input type="submit" name="submit" value="Submit">
-</form>
 
 <!--
 <p> SPACE TO PUT THE ANSWERS OF THE REQUIRED QUERY </p>

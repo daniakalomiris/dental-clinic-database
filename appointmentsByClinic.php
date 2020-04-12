@@ -31,9 +31,12 @@ try  {
 <form method="post">
     <label>Select a clinic:</label>
     <select name="selectClinic">
-        <option value="1"><?php echo $clinics[0]["name"];?></option>
-        <option value="2"><?php echo $clinics[1]["name"];?></option>
-        <option value="3"><?php echo $clinics[2]["name"];?></option>
+        <?php 
+        $counter = 1;
+        foreach ($clinics as $clinic) {  ?>
+            <option value="<?php echo $counter ?>"><?php echo $clinics[$counter-1]["name"];?></option>
+            <?php $counter++;
+        } ?>
     </select>
     <label for="date">Select a date:</label>
     <input type="date" id="date" name="date">

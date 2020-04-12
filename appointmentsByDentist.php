@@ -31,16 +31,12 @@ try  {
 <form method="post">
     <label>Select a dentist:</label>
     <select name="selectDentist">
-        <option value="1"><?php echo $dentists[0]["name"];?></option>
-        <option value="2"><?php echo $dentists[1]["name"];?></option>
-        <option value="3"><?php echo $dentists[2]["name"];?></option>
-        <option value="4"><?php echo $dentists[3]["name"];?></option>
-        <option value="5"><?php echo $dentists[4]["name"];?></option>
-        <option value="6"><?php echo $dentists[5]["name"];?></option>
-        <option value="7"><?php echo $dentists[6]["name"];?></option>
-        <option value="8"><?php echo $dentists[7]["name"];?></option>
-        <option value="9"><?php echo $dentists[8]["name"];?></option>
-        <option value="10"><?php echo $dentists[9]["name"];?></option>
+        <?php 
+        $counter = 1;
+        foreach ($dentists as $dentist) {  ?>
+            <option value="<?php echo $counter ?>"><?php echo $dentists[$counter-1]["name"];?></option>
+            <?php $counter++;
+        } ?>
     </select>
     <label for="week">Select a week:</label>
     <input type="week" id="week" name="week">

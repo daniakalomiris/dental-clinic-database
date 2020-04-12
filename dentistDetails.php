@@ -17,16 +17,16 @@ try  {
     $result = $statement->fetchAll();
 
     if ($result && $statement->rowCount() > 0) { ?>
-    <br>
-    <?php 
-        foreach ($result as $row) { ?>
-            <tr>
-                <td>Name: <?php echo $row["name"]; ?></td>
-                <td>Dentist ID: <?php echo $row["DID"]; ?></td>
-                <td>Clinic: <?php echo $row["clinicName"]; ?></td>
-            </tr>
-            <br>
-        <?php }
+        <h4>Dentists</h4>
+        <?php 
+            foreach ($result as $row) { ?>
+                <tr>
+                    <td>Name: <?php echo $row["name"]; ?></td>
+                    <td>Dentist ID: <?php echo $row["DID"]; ?></td>
+                    <td>Clinic: <?php echo $row["clinicName"]; ?></td>
+                </tr>
+                <br>
+            <?php }
     }
 } catch(PDOException $error) {
     echo $sql . "<br>" . $error->getMessage();

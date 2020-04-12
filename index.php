@@ -1,5 +1,5 @@
 <?php include "resources/header.php"; ?>
-<h1 align = "center">Welcome to the Dentistry Database</h1>
+<h1 align = "center">Welcome to the Dental Clinic Database</h1>
 
 <ul>
     <li><a href="dentistDetails.php"><strong>View details of all dentists</strong></a></li>
@@ -7,24 +7,9 @@
     <li><a href="appointmentsByClinic.php"><strong>View details of appointments by clinic for a given date</strong></a></li>
     <li><a href="appointmentsByPatient.php"><strong>View details of appointments by patient</strong></a></li>
     <li><a href="missedAppointments.php"><strong>View number of missed appointments for each patient (only for patients who have missed at least 1 appointment)</strong></a></li>
+    <li><a href="treatmentsByAppointment.php"><strong>View details of all treatments by appointment</strong></a></li>
     <li><a href="unpaidBills.php"><strong>View details of all unpaid bills</strong></a></li>
 </ul>
-
-<!-- 
-<h3>
-    F. Get details of all the treatments made during a given appointment.
-</h3>
-
-<form action = "SHOULD BE THE PHP CODE HERE">
-    <select name = "dropdown">
-        <option value = "Clinic 1" selected>Clinic 1</option>
-        <option value = "Clinic 2">Clinic 2</option>
-        <option value = "Clinic 3">Clinic 3</option>
-    </select>
-    <label for="date">Chose a given apointment at a given clinic:</label>
-    <input type="date" id="date2" name="date2">
-    <input type="submit">
-</form> -->
 
 <!-- <h3>
     Enter the name of the patient you would want to add

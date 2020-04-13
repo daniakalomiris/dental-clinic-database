@@ -25,7 +25,7 @@ $name= $_POST['name'];
     // execute the query
     $stmt->execute();
     if ($name==null){
-echo "plis provide name";
+echo "please provide a Patient Name!";
 }else{
     // echo a message to say the UPDATE succeeded
     echo $stmt->rowCount() . " records UPDATED successfully";

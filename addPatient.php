@@ -4,7 +4,7 @@
 
 <br><form method="post">
 <ul><input type="text" name="name" placeholder="Name"></ul>
-<ul><br><button type="submit" name="submit"> Add patient</button></ul>
+<ul><br><button type="submit" name="submit">Add patient</button></ul>
 
 </form>
 
@@ -26,11 +26,12 @@ if (isset($_POST['submit'])) {
             <div class="alert alert-warning" role="alert" style="width: 250px; margin-left: 25px;">Please enter the patient's name.</div>
         <?php } else {
 
-            $sql = "INSERT INTO patient(pid, name) VALUES('$pid','$name');";
+            $sql = "INSERT INTO Patient(PID, name) VALUES('$pid','$name');";
 
             $statement = $connection->prepare($sql);
             $statement->execute(); ?>
-            <div class="alert alert-success" role="alert" style="width: 500px; margin-left: 25px;"><?php echo $name ?> was succesfully added as a patient!</div>
+
+            <div class="alert alert-success" role="alert" style="width: 500px; margin-left: 25px;"><?php echo $name ?> (Patient ID: <?php echo $pid ?>) was succesfully added as a patient!</div>
 
         <?php }
     } catch(PDOException $error) { ?>

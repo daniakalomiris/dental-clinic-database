@@ -13,7 +13,7 @@
 </ul>
 <ul>
 <br>
-    <li><!--<a href="mmmm.php">-->Enter the Patient name you would want to add to the list of patients and a random Patient ID will be generated</li>
+    <u><h3><li>Enter the Patient name you would want to add to the list of patients and a random Patient ID will be generated</li></h3></u>
 </ul>
 
 <br><form action="mmmm.php" method="POST">
@@ -22,10 +22,9 @@
 
 </form>
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 <ul>
-   <li> Make a new appointment:</li>
+   <u><h3><li> Make a new appointment:</li></h3></u>
 </ul>
 <br><form>
  
@@ -155,19 +154,19 @@ try  {
     <input type="date" id="date" name="date"></ul>
 
 <br>
-<button type="submit" name="submit"> Make Appointment</button><br><br>
+<ul><button type="submit" name="submit"> Make Appointment</button><br><br></ul>
 
 
 
 </form>
 
 
-------------------------------------------------------------------------------------------------------------------------
+
 
 
 
 <ul>
-   <li> Manage Existing Appointment</li>
+   <u><h3><li> Manage Existing Appointment</li></h3></u>
 </ul>
 
 <?php
@@ -199,8 +198,8 @@ try  {
 ?>
 
 <form method="post">
-    <label>Select a patient:</label>
-    <select name="selectPatient"><br><br>
+    <ul><label>Select a patient:</label>
+    <select name="selectPatient"></ul>
      
         <?php
         $counter = 1;
@@ -209,7 +208,7 @@ try  {
             <?php $counter++;
         } ?>
 
-?></form>
+</form>
 
     
 
@@ -260,18 +259,23 @@ if (isset($_POST['submit'])) {
 } ?>
 
 
-----------------------------------------------------------------------
-<br><strong>OLD DATE:</strong>
+}
+<br><ul><strong>OLD DATE:</strong></ul>
+<br><ul><strong>OLD DATE:</strong></ul>
 <br><input type="date" id="date3" name="date3">
 <br>
-<strong>NEW DATE:</strong>
+
+<br><br>
+<strong>OLD DATE:</strong>
+<br><input type="date" id="date3" name="date3"><br>
+<br><strong>NEW DATE:</strong>
 <br><input type="date" id="date4" name="date4">
 <br>
 
 <br><button class="w3-btn w3-orange w3-xlarge"><i class="glyphicon glyphicon-user"></i></input></button><br>
 
 
---------------------------------------------------------------------------
+---------------
 
 
 <p><button class="w3-btn w3-orange w3-xlarge"><i class="glyphicon glyphicon-trash"></i></input></button><!-- USED TO DELETE -->

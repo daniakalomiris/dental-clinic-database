@@ -17,14 +17,16 @@ try  {
     $result = $statement->fetchAll();
 
     if ($result && $statement->rowCount() > 0) { ?>
-        <h4>Dentists</h4>
+        <h4 style="margin-left: 25px;">Dentists</h4>
         <?php 
             foreach ($result as $row) { ?>
-                <tr>
-                    <td>Name: <?php echo $row["name"]; ?></td>
-                    <td>Dentist ID: <?php echo $row["DID"]; ?></td>
-                    <td>Clinic: <?php echo $row["clinicName"]; ?></td>
-                </tr>
+                <div class="card" style="margin-left: 25px;">
+                    <tr>
+                        <td>Name: <?php echo $row["name"]; ?></td>
+                        <td>Dentist ID: <?php echo $row["DID"]; ?></td>
+                        <td>Clinic: <?php echo $row["clinicName"]; ?></td>
+                    </tr>
+                </div>
                 <br>
             <?php }
     }
@@ -36,6 +38,6 @@ try  {
 
 <br>
 
-<a href="index.php">Return to Dentistry Database</a>
+<a href="index.php" style="margin-left: 25px;">Back to home</a>
 
 <?php require "resources/footer.php"; ?>

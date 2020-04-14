@@ -21,16 +21,27 @@ try  {
         
     if ($result && $statement->rowCount() > 0) { ?>
         <h4 style="margin-left: 25px;">Appointments missed (at least 1)</h4>
+        <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Patient</th>
+                        <th scope="col">Appointments missed</th>
+                    </tr>
+                </thead>
+            <tbody>
         <?php 
             foreach ($result as $row) { ?>
                 <div class="card" style="margin-left: 25px;">
                     <tr>
-                        <td>Patient: <?php echo $row["name"]; ?></td>
-                        <td>Appointments missed: <?php echo $row["missedAppointments"]; ?> </td>
+                        <td><?php echo $row["name"]; ?></td>
+                        <td><?php echo $row["missedAppointments"]; ?> </td>
                     </tr>
                 </div>
-                <br>
-            <?php }
+    
+        <?php } ?>
+            </tbody>
+            </table>
+        <?php
     }
 } catch(PDOException $error) {
     echo $sql . "<br>" . $error->getMessage();

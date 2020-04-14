@@ -20,18 +20,30 @@ try  {
         
     if ($result && $statement->rowCount() > 0) { ?>
         <h4 style="margin-left: 25px;">Unpaid bills</h4>
+        <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Bill ID</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Appointment ID</th>
+                        <th scope="col">Processed by</th>
+                    </tr>
+                </thead>
+            <tbody>
         <?php 
             foreach ($result as $row) { ?>
                 <div class="card" style="margin-left: 25px;">
                     <tr>
-                        <td>Bill ID: <?php echo $row["BID"]; ?></td>
-                        <td>Amount: <?php echo "$" . $row["amount"]; ?></td>
-                        <td>Appointment ID: <?php echo $row["AID"]; ?></td>
-                        <td>Processed by: <?php echo $row["receptionistName"]; ?></td>
+                        <td><?php echo $row["BID"]; ?></td>
+                        <td><?php echo "$" . $row["amount"]; ?></td>
+                        <td><?php echo $row["AID"]; ?></td>
+                        <td><?php echo $row["receptionistName"]; ?></td>
                     </tr>
                 </div>
-                <br>
-            <?php }
+                <?php } ?>
+            </tbody>
+            </table>
+            <?php
     }
 } catch(PDOException $error) {
     echo $sql . "<br>" . $error->getMessage();

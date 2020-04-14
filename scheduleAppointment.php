@@ -135,7 +135,7 @@ if (isset($_POST['submit'])) {
         <div class="alert alert-success" role="alert" style="width: 500px; margin-left: 25px;">The appointment was succesfully scheduled!</div>
         <?php
     } catch(PDOException $error) { ?>
-        <div class="alert alert-danger" role="alert" style="width: 500px; margin-left: 25px;">There was an error scheduling the patient. Please try again.</div>
+        <div class="alert alert-danger" role="alert" style="width: 500px; margin-left: 25px;">There was an error scheduling the patient. Please try again and do not leave any fields empty.</div>
     <?php }
 } ?>
 

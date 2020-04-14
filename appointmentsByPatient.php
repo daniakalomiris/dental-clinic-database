@@ -57,28 +57,42 @@ if (isset($_POST['submit'])) {
          
         if ($result && $statement->rowCount() > 0) { ?>
             <h4 style="margin-left: 25px;">Appointments for <?php echo $patients[$patientID - 1]["name"]; ?> </h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Appointment ID</th>
+                        <th scope="col">Clinic</th>
+                        <th scope="col">Patient</th>
+                        <th scope="col">Dentist</th>
+                        <th scope="col">Patient attended appointment</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                </thead>
+            <tbody>
             <?php 
                 foreach ($result as $row) { ?>
                     <div class="card" style="margin-left: 25px;">
                         <tr>
-                            <td>Appointment ID: <?php echo $row["AID"]; ?></td>
-                            <td>Clinic: <?php echo $row["clinicName"]; ?></td>
-                            <td>Patient: <?php echo $patients[$patientID-1]["name"]; ?></td>
-                            <td>Dentist: <?php echo $row["dentistName"]; ?></td>
-                            <td>Patient attended appointment: <?php 
+                            <td><?php echo $row["AID"]; ?></td>
+                            <td><?php echo $row["clinicName"]; ?></td>
+                            <td><?php echo $patients[$patientID-1]["name"]; ?></td>
+                            <td><?php echo $row["dentistName"]; ?></td>
+                            <td><?php 
                                 if ($row["attended"] == 1) {
                                     echo "Yes";
                                 } else {
                                     echo "No";
                                 }
                                 ?></td>
-                            <td>Date: <?php echo $row["date"]; ?></td>
-                            <td>Time: <?php echo $row["time"]; ?></td>
+                            <td><?php echo $row["date"]; ?></td>
+                            <td><?php echo $row["time"]; ?></td>
                         </tr>
                     </div>
-                    <br>
-                <?php }
-            } else { ?>
+            <?php } ?>
+            </tbody>
+            </table>
+            <?php } else { ?>
                 <h4 style="margin-left: 25px;">There are no appointments for <?php echo $patients[$patientID - 1]["name"]; ?> </h4>
             <?php }
     } catch(PDOException $error) {

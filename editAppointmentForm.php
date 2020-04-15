@@ -207,8 +207,7 @@ if (isset($_POST['submit'])) {
                 SET " . " " . $query . "
                 WHERE AID=" . $AID . "";
 
-        $statement = $connection->prepare($sql);
-        $statement->execute(); ?>
+        $statement = $connection->prepare($sql); ?>
 
         <div class="alert alert-success" role="alert" style="width: 500px; margin-left: 25px;">The appointment (Appointent ID: <?php echo $AID; ?>) was succesfully updated!</div>
         <?php

@@ -5,6 +5,7 @@
 
 $AID = $_GET['id'];
 
+$appointmentToUpdate = array();
 $patients = array();
 $dentists = array();
 $clinics = array();
@@ -22,18 +23,19 @@ try  {
     $statement = $connection->prepare($sql);
     $statement->execute();
     $result = $statement->fetchAll();
-    $appointment = $result;
+
+    if ($result && $statement->rowCount() > 0) { ?>
+        <?php 
+            foreach ($result as $row) { 
+                $appointmentToUpdate[] = $row; ?>
+            <?php }
+        }
     
 } catch(PDOException $error) {
     echo $sql . "<br>" . $error->getMessage();
 }
 
 try  {
-    require "config.php";
-    require "common.php";
-
-    $connection = new PDO($dsn, $username, $password, $options);
-
     $sql = "SELECT * FROM Patient";
 
     $statement = $connection->prepare($sql);
@@ -68,6 +70,7 @@ try  {
 }
 
 try  {
+
     $sql = "SELECT * FROM Clinic";
 
     $connection = new PDO($dsn, $username, $password, $options);
@@ -87,7 +90,7 @@ try  {
 }
 ?>
 
-<h4>Edit appointment</h4> 
+<h4 style="margin-left: 25px;">Edit appointment</h4> 
 
 <form method="post">
     <table class="table">
@@ -105,6 +108,7 @@ try  {
             <tr>
                 <td>
                     <select name="selectClinic">
+                        <option value="" selected disabled hidden>Select clinic</option>
                         <?php
                         foreach ($clinics as $clinic) {  ?>
                             <option value="<?php echo $clinic["CIC"] ?>"><?php echo $clinic["name"];?></option>
@@ -114,6 +118,7 @@ try  {
                 </td>
                 <td> 
                     <select name="selectPatient">
+                        <option value="" selected disabled hidden>Select patient</option>
                         <?php
                         foreach ($patients as $patient) {  ?>
                             <option value="<?php echo $patient["PID"] ?>"><?php echo $patient["name"];?></option>
@@ -123,6 +128,7 @@ try  {
                 </td>
                 <td> 
                     <select name="selectDentist">
+                        <option value="" selected disabled hidden>Select dentist</option>
                         <?php
                         foreach ($dentists as $dentist) {  ?>
                             <option value="<?php echo $dentist["DID"] ?>"><?php echo $dentist["name"];?></option>
@@ -131,12 +137,11 @@ try  {
                     </select>
                 </td>
                 <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="attended" value="1" checked>
-                        <label class="form-check-label" for="exampleRadios1">Yes</label>
-                        <input class="form-check-input" type="radio" name="attended" value="0" checked>
-                        <label class="form-check-label" for="exampleRadios1">No</label>
-                    </div>
+                    <select name="attended">
+                        <option value="" selected disabled hidden>Select</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
                 </td>
                 <td>
                     <input type="date" id="date" name="date">
@@ -147,7 +152,7 @@ try  {
             </tr>
         </tbody>
     </table>
-    <ul><br><button type="submit" class="btn btn-success" name="submit">Update</button></ul>
+    <ul><button type="submit" class="btn btn-success" name="submit">Update</button></ul>
 </form>
  
 <?php
@@ -162,13 +167,46 @@ if (isset($_POST['submit'])) {
         $date = $_POST['date'];
         $time = $_POST['time'];
 
+        $query = '';
+
+        // start of SET
+        if (!empty($clinicID)) {
+            $query .= "CIC=" . $clinicID . ", ";
+        }
+
+        if (empty($clinicID)) {
+            $query .= "CIC=" . $appointmentToUpdate[0]["CIC"] . ", ";
+        }
+ 
+        if (!empty($patientID)) {
+            $query .= "PID=" . $patientID . ", ";
+        }
+
+        if (!empty($dentistID)) {
+            $query .= "DID=" . $dentistID . ", ";
+        }
+
+        if (!empty($attended)) {
+            $query .= "attended=" . $attended . ", ";
+        }
+
+        if (!empty($date)) {
+            $query .= "date='" . $date . "', ";
+        }
+
+        // end of SET
+        if (!empty($time)) {
+            $query .= "time='" . $time . "', ";
+        }
+
+        if (empty($time)) {
+            $query .= "time='" . $appointmentToUpdate[0]["time"] . "' ";
+        }
+
+        echo $query;
+
         $sql = "UPDATE Appointment 
-                SET CIC=" . $clinicID . ", 
-                    PID=" . $patientID . ", 
-                    DID=" . $dentistID . ", 
-                    attended=" . $attended . ", 
-                    date='" . $date . "', 
-                    time='" . $time . "' 
+                SET " . " " . $query . "
                 WHERE AID=" . $AID . "";
 
         $statement = $connection->prepare($sql);

@@ -196,14 +196,12 @@ if (isset($_POST['submit'])) {
 
         // end of SET
         if (!empty($time)) {
-            $query .= "time='" . $time . "', ";
+            $query .= "time='" . $time . "' ";
         }
 
         if (empty($time)) {
             $query .= "time='" . $appointmentToUpdate[0]["time"] . "' ";
         }
-
-        echo $query;
 
         $sql = "UPDATE Appointment 
                 SET " . " " . $query . "

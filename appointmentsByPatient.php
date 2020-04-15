@@ -92,7 +92,7 @@ if (isset($_POST['submit'])) {
             </tbody>
             </table>
             <?php } else { ?>
-                <h4 style="margin-left: 25px;">There are no appointments for <?php echo $patients[$patientID - 1]["name"]; ?> </h4>
+                <h4 style="margin-left: 25px;">No appointments were found!</h4>
             <?php }
     } catch(PDOException $error) {
         echo $sql . "<br>" . $error->getMessage();

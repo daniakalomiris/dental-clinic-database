@@ -118,13 +118,13 @@ if (isset($_POST['submit'])) {
 
         // if no date is selected, return all appointments for selected dentist
         if (empty($date)) {
-            $sql = "SELECT Appointment.*, Patient.name AS patientName
-            FROM Appointment, Patient
-            WHERE Appointment.PID=" . $patientID . " AND Appointment.PID=Patient.PID AND Appointment.CIC=" . $clinicID . " AND Appointment.DID=" . $dentistID . " ";
+            $sql = "SELECT Appointment.*, Patient.name AS patientName, Clinic.name as clinicName, Dentist.name as dentistName
+            FROM Appointment, Patient, Clinic, Dentist
+            WHERE Appointment.PID=" . $patientID . " AND Appointment.PID=Patient.PID AND Appointment.CIC=" . $clinicID . " AND Appointment.CIC=Clinic.CIC AND Appointment.DID=" . $dentistID . " AND Appointment.DID=Dentist.DID";
         } else {
-            $sql = "SELECT Appointment.*, Patient.name AS patientName
-            FROM Appointment, Patient
-            WHERE Appointment.PID=" . $patientID . " AND Appointment.PID=Patient.PID AND Appointment.CIC=" . $clinicID . " AND Appointment.DID=" . $dentistID . " AND Appointment.date='" . $date . "'";
+            $sql = "SELECT Appointment.*, Patient.name AS patientName, Clinic.name as clinicName, Dentist.name as dentistName
+            FROM Appointment, Patient, Clinic, Dentist
+            WHERE Appointment.PID=" . $patientID . " AND Appointment.PID=Patient.PID AND Appointment.CIC=" . $clinicID . " AND Appointment.CIC=Clinic.CIC AND Appointment.DID=" . $dentistID . " AND Appointment.DID=Dentist.DID AND Appointment.date='" . $date . "'";
         }
 
         $statement = $connection->prepare($sql);
@@ -152,9 +152,9 @@ if (isset($_POST['submit'])) {
                     <div class="card" style="margin-left: 25px;">
                         <tr>
                             <td><?php echo $row["AID"]; ?></td>
-                            <td><?php echo $clinics[$clinicID-1]["name"]; ?></td>
+                            <td><?php echo $row["clinicName"]; ?></td>
                             <td><?php echo $row["patientName"]; ?></td>
-                            <td><?php echo $dentists[$dentistID-1]["name"]; ?></td>
+                            <td><?php echo $row["dentistName"]; ?></td>
                             <td><?php 
                                 if ($row["attended"] == 1) {
                                     echo "Yes";

@@ -15,11 +15,8 @@
 </ul>
 
 <a class="btn btn-primary" type="submit" href="addPatient.php" role="button" style="margin-left: 25px;">Add a patient</button>
-
 <a class="btn btn-primary" type="submit" href="scheduleAppointment.php" role="button" style="margin-left: 25px;">Schedule an appointment</button>
-
 <a class="btn btn-primary" type="submit" href="manageAppointment.php" role="button" style="margin-left: 25px;">Manage an appointment</button>
-
 <a class="btn btn-warning" type="submit" href="DBA.php" role="button" style="margin-left: 25px;">DBA access</button>
 
 <?php include "resources/footer.php"; ?>

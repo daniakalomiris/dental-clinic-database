@@ -32,10 +32,9 @@ try  {
     <label style="margin-left: 25px;">Select a patient:</label>
     <select name="selectPatient">
         <?php 
-        $counter = 1;
         foreach ($patients as $patient) {  ?>
-            <option value="<?php echo $counter ?>"><?php echo $patients[$counter-1]["name"];?></option>
-            <?php $counter++;
+            <option value="<?php echo $patient["PID"] ?>"><?php echo $patient["name"];?></option>
+            <?php
         } ?>
     </select>
     <label for="date">Select a date:</label>
@@ -53,13 +52,13 @@ if (isset($_POST['submit'])) {
 
         // if no date is selected, return all appointments for patient
         if (empty($date)) {
-            $sql = "SELECT Appointment.*, Dentist.name as dentistName, Clinic.name as clinicName
-            FROM Appointment, Dentist, Clinic
-            WHERE Appointment.PID=" . $patientID . " AND Dentist.DID=Appointment.DID AND Clinic.CIC=Appointment.CIC";
+            $sql = "SELECT Appointment.*, Dentist.name as dentistName, Clinic.name as clinicName, Patient.name as patientName
+            FROM Appointment, Dentist, Clinic, Patient
+            WHERE Appointment.PID=" . $patientID . " AND Patient.PID=Appointment.PID AND Dentist.DID=Appointment.DID AND Clinic.CIC=Appointment.CIC";
         } else {
-            $sql = "SELECT Appointment.*, Dentist.name as dentistName, Clinic.name as clinicName
-            FROM Appointment, Dentist, Clinic
-            WHERE Appointment.PID=" . $patientID . " AND Dentist.DID=Appointment.DID AND Clinic.CIC=Appointment.CIC AND date='" . $date . "'";
+            $sql = "SELECT Appointment.*, Dentist.name as dentistName, Clinic.name as clinicName, Patient.name as patientName
+            FROM Appointment, Dentist, Clinic, Patient
+            WHERE Appointment.PID=" . $patientID . " AND Patient.PID=Appointment.PID AND Dentist.DID=Appointment.DID AND Clinic.CIC=Appointment.CIC AND date='" . $date . "'";
         }
 
         $statement = $connection->prepare($sql);
@@ -67,7 +66,7 @@ if (isset($_POST['submit'])) {
         $result = $statement->fetchAll();
          
         if ($result && $statement->rowCount() > 0) { ?>
-            <h4 style="margin-left: 25px;">Appointments for <?php echo $patients[$patientID - 1]["name"]; ?> </h4>
+            <h4 style="margin-left: 25px;">Appointments for <?php echo $result[0]["patientName"]; ?> </h4>
             <table class="table">
                 <thead>
                     <tr>
@@ -88,7 +87,7 @@ if (isset($_POST['submit'])) {
                         <tr>
                             <td><?php echo $row["AID"]; ?></td>
                             <td><?php echo $row["clinicName"]; ?></td>
-                            <td><?php echo $patients[$patientID-1]["name"]; ?></td>
+                            <td><?php echo $row["patientName"]; ?></td>
                             <td><?php echo $row["dentistName"]; ?></td>
                             <td><?php 
                                 if ($row["attended"] == 1) {
@@ -132,12 +131,20 @@ if (isset($_POST['treatment'])) {
          
         if ($result && $statement->rowCount() > 0) { ?>
             <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Treatment</th>
+                        <th scope="col">Executed by</th>
+                    </tr>
+                </thead>
+            <tbody>
             <?php 
                 foreach ($result as $row) { ?>
                     <div class="card" style="margin-left: 25px;">
                         <tr>
-                            <td>Treatment: <?php echo $row["treatment"]; ?></td>
-                            <td>Executed by: <?php 
+                            <td><?php echo $row["treatment"]; ?></td>
+                            <td><?php 
                                 if ($row["executedByDentist"] == 1) {
                                     echo "Dentist";
                                 } else {
@@ -146,9 +153,10 @@ if (isset($_POST['treatment'])) {
                                 ?></td>
                         </tr>
                     </div>
-                    <br>
-                <?php }
-            } else { ?>
+                    <?php } ?>
+            </tbody>
+            </table>
+            <?php } else { ?>
                 <h4>There are no treatments for this appointment</h4>
             <?php }
     } catch(PDOException $error) {

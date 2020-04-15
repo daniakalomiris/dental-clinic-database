@@ -77,30 +77,27 @@ try  {
     <label><ul>Select a patient:</ul></label>
     <select name="selectPatient">
         <?php 
-        $counter = 1;
         foreach ($patients as $patient) {  ?>
-            <option value="<?php echo $counter ?>"><?php echo $patients[$counter-1]["name"];?></option>
-            <?php $counter++;
+            <option value="<?php echo $patient["PID"] ?>"><?php echo $patient["name"];?></option>
+            <?php
         } ?>
     </select>
 
     <label><ul>Select a dentist:</ul></label>
     <select name="selectDentist">
-        <?php 
-        $counter = 1;
+        <?php
         foreach ($dentists as $dentist) {  ?>
-            <option value="<?php echo $counter ?>"><?php echo $dentists[$counter-1]["name"];?></option>
-            <?php $counter++;
+            <option value="<?php echo $dentist["DID"] ?>"><?php echo $dentist["name"];?></option>
+            <?php
         } ?>
     </select>
 
     <label><ul>Select a clinic:</ul></label>
     <select name="selectClinic">
-        <?php 
-        $counter = 1;
+        <?php
         foreach ($clinics as $clinic) {  ?>
-            <option value="<?php echo $counter ?>"><?php echo $clinics[$counter-1]["name"];?></option>
-            <?php $counter++;
+            <option value="<?php echo $clinic["CIC"] ?>"><?php echo $clinic["name"];?></option>
+            <?php
         } ?>
     </select>
 
@@ -132,7 +129,7 @@ if (isset($_POST['submit'])) {
         $statement = $connection->prepare($sql);
         $statement->execute(); ?>
 
-        <div class="alert alert-success" role="alert" style="width: 500px; margin-left: 25px;">The appointment was succesfully scheduled!</div>
+        <div class="alert alert-success" role="alert" style="width: 500px; margin-left: 25px;">The appointment (Appointent ID: <?php echo $appointmentID; ?>) was succesfully scheduled!</div>
         <?php
     } catch(PDOException $error) { ?>
         <div class="alert alert-danger" role="alert" style="width: 500px; margin-left: 25px;">There was an error scheduling the patient. Please try again and do not leave any fields empty.</div>

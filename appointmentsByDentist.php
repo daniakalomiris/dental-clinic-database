@@ -31,11 +31,10 @@ try  {
 <form method="post" style="margin-left: 25px;">
     <label>Select a dentist:</label>
     <select name="selectDentist">
-        <?php 
-        $counter = 1;
+        <?php
         foreach ($dentists as $dentist) {  ?>
-            <option value="<?php echo $counter ?>"><?php echo $dentists[$counter-1]["name"];?></option>
-            <?php $counter++;
+            <option value="<?php echo $dentist["DID"] ?>"><?php echo $dentist["name"];?></option>
+            <?php
         } ?>
     </select>
     <label for="week">Select a week:</label>

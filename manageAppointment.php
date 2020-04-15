@@ -76,31 +76,28 @@ try  {
 <form method="post">
     <label><ul>Select a patient:</ul></label>
     <select name="selectPatient">
-        <?php 
-        $counter = 1;
+        <?php
         foreach ($patients as $patient) {  ?>
-            <option value="<?php echo $counter ?>"><?php echo $patients[$counter-1]["name"];?></option>
-            <?php $counter++;
+            <option value="<?php echo $patient["PID"] ?>"><?php echo $patient["name"];?></option>
+            <?php
         } ?>
     </select>
 
     <label><ul>Select a dentist:</ul></label>
     <select name="selectDentist">
-        <?php 
-        $counter = 1;
+        <?php
         foreach ($dentists as $dentist) {  ?>
-            <option value="<?php echo $counter ?>"><?php echo $dentists[$counter-1]["name"];?></option>
-            <?php $counter++;
+            <option value="<?php echo $dentist["DID"] ?>"><?php echo $dentist["name"];?></option>
+            <?php
         } ?>
     </select>
 
     <label><ul>Select a clinic:</ul></label>
     <select name="selectClinic">
-        <?php 
-        $counter = 1;
+        <?php
         foreach ($clinics as $clinic) {  ?>
-            <option value="<?php echo $counter ?>"><?php echo $clinics[$counter-1]["name"];?></option>
-            <?php $counter++;
+            <option value="<?php echo $clinic["CIC"] ?>"><?php echo $clinic["name"];?></option>
+            <?php
         } ?>
     </select>
 
@@ -121,13 +118,13 @@ if (isset($_POST['submit'])) {
 
         // if no date is selected, return all appointments for selected dentist
         if (empty($date)) {
-            $sql = "SELECT Appointment.*
-            FROM Appointment
-            WHERE Appointment.PID=" . $patientID . " AND Appointment.CIC=" . $clinicID . " AND Appointment.DID=" . $dentistID . " ";
+            $sql = "SELECT Appointment.*, Patient.name AS patientName
+            FROM Appointment, Patient
+            WHERE Appointment.PID=" . $patientID . " AND Appointment.PID=Patient.PID AND Appointment.CIC=" . $clinicID . " AND Appointment.DID=" . $dentistID . " ";
         } else {
-            $sql = "SELECT Appointment.*
-            FROM Appointment
-            WHERE Appointment.PID=" . $patientID . " AND Appointment.CIC=" . $clinicID . " AND Appointment.DID=" . $dentistID . " AND Appointment.date='" . $date . "'";
+            $sql = "SELECT Appointment.*, Patient.name AS patientName
+            FROM Appointment, Patient
+            WHERE Appointment.PID=" . $patientID . " AND Appointment.PID=Patient.PID AND Appointment.CIC=" . $clinicID . " AND Appointment.DID=" . $dentistID . " AND Appointment.date='" . $date . "'";
         }
 
         $statement = $connection->prepare($sql);
@@ -156,7 +153,7 @@ if (isset($_POST['submit'])) {
                         <tr>
                             <td><?php echo $row["AID"]; ?></td>
                             <td><?php echo $clinics[$clinicID-1]["name"]; ?></td>
-                            <td><?php echo $patients[$patientID-1]["name"]; ?></td>
+                            <td><?php echo $row["patientName"]; ?></td>
                             <td><?php echo $dentists[$dentistID-1]["name"]; ?></td>
                             <td><?php 
                                 if ($row["attended"] == 1) {
@@ -167,7 +164,11 @@ if (isset($_POST['submit'])) {
                                 ?></td>
                             <td><?php echo $row["date"]; ?></td>
                             <td><?php echo $row["time"]; ?></td>
-                            <td><button type="submit" role="button" name="edit" value="<?php echo $row["AID"];?>" class="btn btn-warning">Edit</button></td>
+                            <td>
+                                <form method="post"> 
+                                    <a class="btn btn-warning" type="submit" href="editAppointmentForm.php?id=<?php echo $row["AID"]; ?>" role="button">Edit</button>
+                                </form>  
+                            </td>
                             <td>
                                 <form method="post"> 
                                     <button type="submit" role="button" name="delete" value="<?php echo $row["AID"];?>" class="btn btn-danger">Delete</button>

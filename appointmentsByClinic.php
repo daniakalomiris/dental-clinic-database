@@ -32,10 +32,9 @@ try  {
     <label>Select a clinic:</label>
     <select name="selectClinic">
         <?php 
-        $counter = 1;
         foreach ($clinics as $clinic) {  ?>
-            <option value="<?php echo $counter ?>"><?php echo $clinics[$counter-1]["name"];?></option>
-            <?php $counter++;
+            <option value="<?php echo $clinic["CIC"] ?>"><?php echo $clinic["name"];?></option>
+            <?php
         } ?>
     </select>
     <label for="date">Select a date:</label>

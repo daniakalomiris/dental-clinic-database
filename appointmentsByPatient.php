@@ -31,11 +31,10 @@ try  {
 <form method="post" style="margin-left: 25px;">
     <label>Select a patient:</label>
     <select name="selectPatient">
-        <?php 
-        $counter = 1;
+        <?php
         foreach ($patients as $patient) {  ?>
-            <option value="<?php echo $counter ?>"><?php echo $patients[$counter-1]["name"];?></option>
-            <?php $counter++;
+            <option value="<?php echo $patient["PID"] ?>"><?php echo $patient["name"];?></option>
+            <?php
         } ?>
     <input type="submit" name="submit" value="Search">
 </form>
@@ -47,16 +46,16 @@ if (isset($_POST['submit'])) {
     try  {
         $patientID = $_POST['selectPatient'];
 
-        $sql = "SELECT Appointment.*, Clinic.name as clinicName, Dentist.name as dentistName
-        FROM Appointment, Clinic, Dentist
-        WHERE Appointment.PID=" . $patientID . " AND Clinic.CIC=Appointment.CIC AND Dentist.DID=Appointment.DID";
+        $sql = "SELECT Appointment.*, Clinic.name as clinicName, Dentist.name as dentistName, Patient.name as patientName
+        FROM Appointment, Clinic, Dentist, Patient
+        WHERE Appointment.PID=" . $patientID . " AND Patient.PID=Appointment.PID AND Clinic.CIC=Appointment.CIC AND Dentist.DID=Appointment.DID";
 
         $statement = $connection->prepare($sql);
         $statement->execute();
         $result = $statement->fetchAll();
          
         if ($result && $statement->rowCount() > 0) { ?>
-            <h4 style="margin-left: 25px;">Appointments for <?php echo $patients[$patientID - 1]["name"]; ?> </h4>
+            <h4 style="margin-left: 25px;">Appointments for <?php echo $result[0]["patientName"]; ?> </h4>
             <table class="table">
                 <thead>
                     <tr>
@@ -76,7 +75,7 @@ if (isset($_POST['submit'])) {
                         <tr>
                             <td><?php echo $row["AID"]; ?></td>
                             <td><?php echo $row["clinicName"]; ?></td>
-                            <td><?php echo $patients[$patientID-1]["name"]; ?></td>
+                            <td><?php echo $row["patientName"]; ?></td>
                             <td><?php echo $row["dentistName"]; ?></td>
                             <td><?php 
                                 if ($row["attended"] == 1) {

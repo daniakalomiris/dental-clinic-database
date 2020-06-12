@@ -1,4 +1,4 @@
-# COMP 353 - Dental Clinic Database
+# COMP 353 - Databases
 
 Dental Clinic Database is an interface that manages a network of clinics.
 
